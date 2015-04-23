@@ -1,0 +1,18 @@
+{{define "Schedule"}}
+    <div class="schedule-container">
+        <div class="schedule">
+            {{range .Fixtures}}
+                {{template "Fixture" .}}
+            {{end}}
+        </div>
+    </div>
+{{end}}
+
+{{define "Fixture"}}
+    <a class="fixture"
+       href="/user/schedules/base/fixtures/{{ .ID }}/"
+       style="top:{{ .RelStart }}%; height:{{.RelHeight}}%;">
+            <div class="name"> {{.Name}} </div>
+            <div class="time"> {{.Time}} </div>
+    </a>
+{{end}}

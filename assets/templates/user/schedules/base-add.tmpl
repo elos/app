@@ -1,0 +1,57 @@
+{{define "Style"}}
+    <link rel="stylesheet" type="text/css" href="/css/user/schedules/add.css">
+{{end}}
+
+{{define "Title"}} Base Schedule: New Fixture {{end}}
+
+{{define "DetailContent"}}
+<form action="/user/schedules/base/add_fixture" method="POST">
+    <table class="form">
+        <tr>
+            <td class="label"> Name: </td>
+            <td>
+                <input type="text" name="name" id="name" value="">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label"> Start Time: </td>
+            <td>
+                <input type="time" name="start_time" id="start_time">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label"> End Time: </td>
+            <td>
+                <input type="time" name="end_time" id="end_time">
+            </td>
+        </tr>
+
+        <tr style="display:none">
+            <td class="label"> All Day? </td>
+            <td>
+                <input type="checkbox" name="label" id="label" value="true" onclick="switchLabel()">
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Create Fixture">
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        var label = false;
+        function switchLabel() {
+            document.getElementById("start_time").disabled = !label;
+            document.getElementById("end_time").disabled = !label;
+            label = !label;
+        }
+    </script>
+</form>
+{{end}}
+
+{{define "Buttons"}} {{end}}

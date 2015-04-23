@@ -1,0 +1,79 @@
+@import "fonts.css";
+@import "card.css";
+
+a.button {
+    height: 1.6em;
+    line-height: 1.6em;
+
+    color: black;
+    font-size: .85em;
+    line-height: 2.2em;
+    min-height: 2.2em;
+    text-align: center;
+    text-decoration: none;
+    /* must be explicit for a link */
+    font-family: "Avenir Next Regular";
+
+    background: none;
+    border: 1px #979797 solid;
+    border-radius: 5px;
+
+    cursor: pointer;
+    outline: none;
+}
+
+a.button.green {
+    color: #00FFA3;
+    border-color: #00FFA3;
+}
+
+input[type="submit"] {
+    color: black;
+    font-size: .85em;
+
+    background: none;
+    border: 1px #00FFA3 solid;
+    outline: none;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-family: "Avenir Next Regular";
+    border: 1px solid #979797;
+    border-radius: 8px;
+    padding: 5px 20px;
+}
+
+input[type="text"], input[type="time"] {
+    border: 1px solid #979797;
+    border-radius: 8px;
+    background-color: #F9F9F9;
+
+    color: #979797;
+    font-family: "Avenir Next UltraLight";
+
+    line-height: 2.9em;
+
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+}
+
+input:focus {
+    outline: none;
+}
+
+input[type="text"]:disabled {
+    background-color: #DDDDDD;
+    border: 1px solid #00FFA3;
+
+    font-family: "Avenir Next Regular";
+}
+
+/* for informational p text */
+p.info-text {
+    font-family: "Avenir Next Regular";
+    font-size: .8em;
+    color: #000000;
+    line-height: 25px;
+}

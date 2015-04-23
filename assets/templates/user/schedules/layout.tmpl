@@ -1,0 +1,30 @@
+{{define "HEAD"}}
+    <link rel="stylesheet" type="text/css" href="/css/user/schedules/layout.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/schedules/common.css">
+    {{template "Style" $}}
+    <title>{{template "Title" $}}</title>
+{{end}}
+
+{{define "Header"}} {{end}}
+
+{{define "Content"}}
+<div class="element detail">
+    <h1 class="title">{{template "Title" $}}</h1>
+    <div class="detail-content">
+        {{template "DetailContent" $}}
+    </div>
+    <div class="buttons">
+        {{template "Buttons" $}}
+    </div>
+</div>
+
+<div class="element">
+    {{template "Schedule" .}}
+    <a id="add-fixture" class="button gray" href="/user/schedules/base/add_fixture">
+        Add Fixture
+    </a>
+</div>
+{{end}}
+
+{{define "Footer"}} {{end}}
+

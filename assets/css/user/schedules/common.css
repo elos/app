@@ -1,0 +1,57 @@
+/* the container for the schedule
+ * view, contains schedule allows
+ * scrolling */
+div.schedule-container {
+    height: 80vh;
+    width: 100%;
+
+    overflow-y: scroll;
+    border: 1px solid gray;
+    padding: 5px;
+    background-color: #EDEDED;
+
+    /* push down the add fixture buttom */
+    margin-bottom: 0.8em;
+}
+
+/* holds fixture elements, twice as tall
+ * as the schedule-container, gets scrolled */
+div.schedule-container > div.schedule {
+    position: relative;
+    top: 0;
+    left: -1px; /* fix offset */
+    height: 200%;
+
+    background-color: none;
+    display: flex;
+}
+
+/* schedule fixture elements */
+div.schedule > a.fixture {
+    width: 100%;
+    position: absolute;
+
+    background-color: white;
+    border: 1px solid #979797;
+}
+
+/* name and time components of a fixture box */
+a.fixture > div.name, a.fixture > div.time {
+    color: black;
+    position: absolute;
+    top: 0.5em;
+
+    font-size: 0.75em;
+    font-family: "Avenir Next Medium";
+}
+
+/* name is top left */
+a.fixture > div.name {
+    left: 0.5em;
+}
+
+/* time is top rioht */
+a.fixture > div.time {
+    right: 0.5em;
+    color: #979797;
+}

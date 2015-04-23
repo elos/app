@@ -1,0 +1,19 @@
+table.form {
+    width: 100%;
+}
+
+table.form > tbody > tr > td {
+    padding: 0.15em;
+}
+
+td.label {
+    color: #979797;
+    font-family: "Avenir Next Medium";
+    font-size: 0.8em;
+    text-align: right;
+    padding-right: 0.2em;
+}
+
+td > input[type="text"], td > input[type="time"] {
+    width: 90%;
+}

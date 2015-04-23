@@ -1,0 +1,30 @@
+{{define "Head"}}
+    <title> User Calendar </title>
+    <link rel="stylesheet" type="text/css" href="/css/calendar.css">
+    <link rel="stylesheet" type="text/css" href="/css/user/schedules/layout.css">
+{{end}}
+
+{{define "Header"}} {{end}}
+
+{{define "Body"}}
+<table border="0">
+    <thead>
+        <tr>
+            {{range .Days}}
+                <th> {{.Header}} </th>
+            {{end}}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {{range .Days}}
+                <td>
+                    {{template "Schedule" .}}
+                </td>
+            {{end}}
+        </tr>
+    </tbody>
+</table>
+{{end}}
+
+{{define "Footer"}} {{end}}
