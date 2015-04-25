@@ -1,0 +1,19 @@
+{{define "HEAD"}}
+{{css "/css/user/schedules.css"}}
+{{end}}
+
+{{define "Header"}}
+{{end}}
+
+{{define "Content"}}
+    <p class="info-text"> Welcome to elos. </p>
+    <div id="buttons">
+    {{with $routes := .Routes}}
+        <form action="{{$routes.UserCalendar}}">
+            <input type="submit" value="Calendar">
+        </form>
+    {{end}}
+    </div>
+{{end}}
+
+{{define "Footer"}} {{end}}

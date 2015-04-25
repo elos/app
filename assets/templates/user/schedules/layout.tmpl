@@ -19,8 +19,8 @@
 </div>
 
 <div class="element">
-    {{template "Schedule" .}}
-    <a id="add-fixture" class="button gray" href="/user/schedules/base/add_fixture">
+    {{template "Schedule" dict "Data" .Data "Routes" .Routes}}
+    <a id="add-fixture" class="button gray" href="{{.Routes.UserSchedulesBaseAddFixture}}">
         Add Fixture
     </a>
 </div>

@@ -1,27 +1,29 @@
-{{define "Head"}}
+{{define "HEAD"}}
     <title> User Calendar </title>
-    <link rel="stylesheet" type="text/css" href="/css/calendar.css">
-    <link rel="stylesheet" type="text/css" href="/css/user/schedules/layout.css">
+    {{css "/css/calendar.css"}}
+    {{css "/css/user/schedules/layout.css"}}
 {{end}}
 
 {{define "Header"}} {{end}}
 
-{{define "Body"}}
+{{define "Content"}}
 <table border="0">
     <thead>
         <tr>
-            {{range .Days}}
+            {{range .Data.Days}}
                 <th> {{.Header}} </th>
             {{end}}
         </tr>
     </thead>
     <tbody>
         <tr>
-            {{range .Days}}
+        {{with $context := .}}
+            {{range .Data.Days}}
                 <td>
-                    {{template "Schedule" .}}
+                    {{template "Schedule" dict "Data" . "Routes" $context.Routes}}
                 </td>
             {{end}}
+        {{end}}
         </tr>
     </tbody>
 </table>

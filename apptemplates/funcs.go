@@ -14,6 +14,7 @@ var (
 
 	funcs = template.FuncMap{
 		"dict":        templates.Dict,
+		"css":         templates.CSS,
 		"interpolate": interpolate,
 	}
 )

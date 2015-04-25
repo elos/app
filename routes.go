@@ -38,6 +38,7 @@ func (app *App) Routes() []*ehttp.Route {
 		Route(GET, SessionRegister, FanOut(apptemplates.Show(apptemplates.SessionRegister))),
 		Route(POST, SessionRegister, FanOut(apphandles.RegisterHandle(app.store))),
 
+		Route(GET, UserBase, FanOut(apptemplates.Show(apptemplates.UserBase))),
 		Route(GET, UserCalendar, FanOut(app.UserTemplate(apptemplates.RenderUserCalendar, app.store))),
 		Route(GET, UserTasks, FanOut(app.UserTemplate(apptemplates.RenderUserEvents, app.store))),
 		Route(GET, UserRoutines, FanOut(app.UserTemplate(apptemplates.RenderUserTasks, app.store))),

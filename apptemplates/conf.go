@@ -21,6 +21,7 @@ const (
 	SessionRegister
 	SessionAccountCreated
 
+	UserBase
 	UserCalendar
 	UserEvents
 	UserTasks
@@ -58,12 +59,13 @@ func Schedules(v ...string) []string {
 // Definition of the available templateSets for elos
 // used in initialization of the templates, see: init.go
 var templateSets = templates.TemplateSet{
-	Index: Layout("index.html"),
+	Index: Layout("index.tmpl"),
 
 	SessionSignIn:         Sessions("sessions/sign-in.tmpl"),
 	SessionRegister:       Sessions("sessions/register.tmpl"),
 	SessionAccountCreated: Sessions("sessions/account-created.tmpl"),
 
+	UserBase:      Layout("user/base.tmpl"),
 	UserCalendar:  Layout("user/schedules/common.tmpl", "user/calendar.tmpl"),
 	UserEvents:    Layout("user/events.tmpl"),
 	UserTasks:     Layout("user/tasks.tmpl"),
@@ -88,6 +90,7 @@ var pathToTemplate = map[string]templates.Name{
 	conf.SessionRegister:       SessionRegister,
 	conf.SessionAccountCreated: SessionAccountCreated,
 
+	conf.UserBase:      UserBase,
 	conf.UserCalendar:  UserCalendar,
 	conf.UserEvents:    UserEvents,
 	conf.UserTasks:     UserTasks,
