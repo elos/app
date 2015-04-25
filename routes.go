@@ -1,6 +1,8 @@
 package app
 
 import (
+	"net/http"
+
 	"github.com/elos/app/apphandles"
 	"github.com/elos/app/apptemplates"
 	. "github.com/elos/app/conf"
@@ -28,7 +30,7 @@ func FanOut(f httprouter.Handle) ehttp.Handle {
 
 func (app *App) Routes() []*ehttp.Route {
 	return []*ehttp.Route{
-		Route(GET, Index, FanOut(apptemplates.Show(apptemplates.SessionSignIn))),
+		Route(GET, Index, FanOut(apptemplates.Show(apptemplates.Index))),
 
 		Route(GET, SessionSignIn, FanOut(apptemplates.Show(apptemplates.SessionSignIn))),
 		Route(POST, SessionSignIn, FanOut(handles.Auth(apphandles.SignIn(app.sessions, UserCalendar), transfer.Auth(transfer.FormCredentialer), app.store))),
@@ -70,4 +72,7 @@ func (app *App) ApplyRoutes() {
 			r.GET(p, h)
 		}
 	}
+
+	r.ServeFiles("/img/*filepath", http.Dir(apptemplates.ImgDir))
+	r.ServeFiles("/css/*filepath", http.Dir(apptemplates.CSSDir))
 }

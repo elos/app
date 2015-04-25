@@ -1,6 +1,8 @@
 package apptemplates
 
 import (
+	"log"
+
 	views "github.com/elos/app/appviews"
 	"github.com/elos/ehttp/templates"
 	"github.com/elos/models"
@@ -26,23 +28,23 @@ func RenderUserCalendar(c *transfer.HTTPConnection) error {
 		return err
 	}
 
-	return context.Render(c, UserCalendar, cw)
+	return engine.Render(c, UserCalendar, cw)
 }
 
 func RenderUserEvents(c *transfer.HTTPConnection) error {
-	return context.Render(c, UserEvents, c.Client().(models.User))
+	return engine.Render(c, UserEvents, c.Client().(models.User))
 }
 
 func RenderUserTasks(c *transfer.HTTPConnection) error {
-	return context.Render(c, UserTasks, c.Client().(models.User))
+	return engine.Render(c, UserTasks, c.Client().(models.User))
 }
 
 func RenderUserRoutines(c *transfer.HTTPConnection) error {
-	return context.Render(c, UserRoutines, c.Client().(models.User))
+	return engine.Render(c, UserRoutines, c.Client().(models.User))
 }
 
 func RenderUserSchedules(c *transfer.HTTPConnection) error {
-	return context.Render(c, UserSchedules, c.Client().(models.User))
+	return engine.Render(c, UserSchedules, c.Client().(models.User))
 }
 
 func RenderUserSchedulesBase(c *transfer.HTTPConnection, selectedFixture models.Fixture) error {
@@ -56,7 +58,9 @@ func RenderUserSchedulesBase(c *transfer.HTTPConnection, selectedFixture models.
 		sv.HasSelectedFixture = true
 	}
 
-	return context.Render(c, UserSchedulesBase, sv)
+	log.Print("%+v", pathToTemplate)
+
+	return engine.Render(c, UserSchedulesBase, sv)
 }
 
 func userSchedulesBaseView(c *transfer.HTTPConnection) (*views.Schedule, error) {
@@ -94,21 +98,21 @@ func RenderUserSchedulesBaseAddFixture(c *transfer.HTTPConnection) error {
 		return err
 	}
 
-	return context.Render(c, UserSchedulesBaseAddFixture, sv)
+	return engine.Render(c, UserSchedulesBaseAddFixture, sv)
 }
 
 func RenderUserSchedulesWeekly(c *transfer.HTTPConnection) error {
-	return context.Render(c, UserSchedulesWeekly, c.Client().(models.User))
+	return engine.Render(c, UserSchedulesWeekly, c.Client().(models.User))
 }
 
 func RenderUserSchedulesYearly(c *transfer.HTTPConnection) error {
-	return context.Render(c, UserSchedulesYearly, c.Client().(models.User))
+	return engine.Render(c, UserSchedulesYearly, c.Client().(models.User))
 }
 
 func RenderUserSchedulesWeekday(c *transfer.HTTPConnection, weekday int) error {
-	return context.Render(c, UserSchedulesWeekday, c.Client().(models.User))
+	return engine.Render(c, UserSchedulesWeekday, c.Client().(models.User))
 }
 
 func RenderUserSchedulesYearday(c *transfer.HTTPConnection, yearday int) error {
-	return context.Render(c, UserSchedulesYearday, c.Client().(models.User))
+	return engine.Render(c, UserSchedulesYearday, c.Client().(models.User))
 }

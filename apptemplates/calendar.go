@@ -8,7 +8,7 @@ import (
 )
 
 func RenderFakeCalendar(w http.ResponseWriter, r *http.Request) {
-	context.Render(transfer.NewHTTPConnection(w, r, nil), UserCalendar, &views.CalendarWeek{
+	engine.Render(transfer.NewHTTPConnection(w, r, nil), UserCalendar, &views.CalendarWeek{
 		Days: []*views.CalendarDay{
 			&views.CalendarDay{
 				Header: "Header 1",

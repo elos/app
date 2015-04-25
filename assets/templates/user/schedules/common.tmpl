@@ -1,18 +1,20 @@
 {{define "Schedule"}}
     <div class="schedule-container">
         <div class="schedule">
-            {{range .Fixtures}}
-                {{template "Fixture" .}}
+        {{with $context := .}}
+            {{range .Data.Fixtures}}
+                {{template "Fixture" dict "Fixture" . "Routes" $context.Routes}}
             {{end}}
+        {{end}}
         </div>
     </div>
 {{end}}
 
 {{define "Fixture"}}
     <a class="fixture"
-       href="/user/schedules/base/fixtures/{{ .ID }}/"
-       style="top:{{ .RelStart }}%; height:{{.RelHeight}}%;">
-            <div class="name"> {{.Name}} </div>
-            <div class="time"> {{.Time}} </div>
+       href="{{interpolate .Routes.UserSchedulesBaseFixtures .Fixture.ID}}"
+       style="top:{{ .Fixture.RelStart }}%; height:{{.Fixture.RelHeight}}%;">
+            <div class="name"> {{.Fixture.Name}} </div>
+            <div class="time"> {{.Fixture.Time}} </div>
     </a>
 {{end}}

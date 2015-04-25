@@ -1,6 +1,9 @@
 package conf
 
-import "path/filepath"
+import (
+	"path/filepath"
+	"strings"
+)
 
 var join = filepath.Join
 
@@ -30,3 +33,55 @@ var (
 	UserSchedulesBaseFixturesDelete = UserSchedulesBaseFixtures + "/delete"
 	UserSchedulesBaseAddFixture     = UserSchedulesBase + "/add_fixture"
 )
+
+type RouteInterpolator func(string) string
+
+type RoutesDefinition struct {
+	Index,
+
+	SessionBase,
+	SessionSignIn,
+	SessionRegister,
+	SessionAccountCreated,
+
+	UserBase,
+	UserCalendar,
+	UserEvents,
+	UserTasks,
+	UserRoutines,
+
+	UserSchedules,
+	UserSchedulesBase,
+	UserSchedulesWeekly,
+	UserSchedulesYearly,
+	UserSchedulesWeekday,
+	UserSchedulesYearday,
+
+	UserSchedulesBaseFixturesEdit,
+	UserSchedulesBaseFixturesDelete,
+	UserSchedulesBaseAddFixture string
+
+	UserSchedulesBaseFixtures RouteInterpolator
+}
+
+var Routes = RoutesDefinition{
+	Index: Index,
+
+	SessionBase:           SessionBase,
+	SessionSignIn:         SessionSignIn,
+	SessionRegister:       SessionRegister,
+	SessionAccountCreated: SessionAccountCreated,
+
+	UserBase:             UserBase,
+	UserSchedulesBase:    UserSchedulesBase,
+	UserSchedulesWeekly:  UserSchedulesWeekly,
+	UserSchedulesYearly:  UserSchedulesYearly,
+	UserSchedulesWeekday: UserSchedulesWeekday,
+	UserSchedulesYearday: UserSchedulesYearday,
+
+	UserSchedulesBaseFixturesEdit:   UserSchedulesBaseFixturesEdit,
+	UserSchedulesBaseFixturesDelete: UserSchedulesBaseFixturesDelete,
+	UserSchedulesBaseAddFixture:     UserSchedulesBaseAddFixture,
+
+	UserSchedulesBaseFixtures: func(id string) string { return strings.Replace(UserSchedulesBaseFixtures, ":fixture_id", id, 1) },
+}

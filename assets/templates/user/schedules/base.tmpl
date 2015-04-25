@@ -5,18 +5,18 @@
 {{define "Title"}} Base Schedule {{end}}
 
 {{define "DetailContent"}}
-    {{if .HasSelectedFixture }}
-        {{with .SelectedFixture}}
+    {{if .Data.HasSelectedFixture }}
+        {{with .Data.SelectedFixture}}
             Selected Fixture: {{ .Name }}
         {{end}}
     {{else}}
-        <p class="info-text"> Your base schedule has {{len .Fixtures }} fixtures. </p>
+        <p class="info-text"> Your base schedule has {{len .Data.Fixtures }} fixtures. </p>
     {{end}}
 {{end}}
 
 {{define "Buttons"}}
-    {{if .HasSelectedFixture }}
-        {{with .SelectedFixture}}
+    {{if .Data.HasSelectedFixture }}
+        {{with .Data.SelectedFixture}}
             <form class="add-fixture-button" action="/user/schedules/base/edit_fixture" method="GET">
                 <input type="text" name="fixture_id" value="{{.ID}}" style="display:none;">
                 <input type="submit" value="Edit">

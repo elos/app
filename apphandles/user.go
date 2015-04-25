@@ -8,6 +8,7 @@ import (
 
 	"github.com/elos/app/apptemplates"
 	"github.com/elos/data"
+	"github.com/elos/ehttp"
 	"github.com/elos/ehttp/handles"
 	"github.com/elos/ehttp/templates"
 	"github.com/elos/models"
@@ -74,11 +75,11 @@ func UserSchedulesWeekday(w http.ResponseWriter, r *http.Request, p httprouter.P
 func userSchedulesWeekday(c *transfer.HTTPConnection, p httprouter.Params) error {
 	weekday, err := strconv.Atoi(p.ByName("weekday"))
 	if err != nil {
-		return handles.NewMissingParamError("weekday")
+		return ehttp.NewMissingParamError("weekday")
 	}
 
 	if weekday < 0 || weekday > 6 {
-		return handles.NewBadParamError("weekday", "must be in range 0-6 inclusive")
+		return ehttp.NewBadParamError("weekday", "must be in range 0-6 inclusive")
 	}
 
 	templates.CatchError(c, apptemplates.RenderUserSchedulesWeekday(c, weekday))
@@ -93,11 +94,11 @@ func UserSchedulesYearday(w http.ResponseWriter, r *http.Request, p httprouter.P
 func userSchedulesYearday(c *transfer.HTTPConnection, p httprouter.Params) error {
 	yearday, err := strconv.Atoi(p.ByName("yearday"))
 	if err != nil {
-		return handles.NewMissingParamError("yearday")
+		return ehttp.NewMissingParamError("yearday")
 	}
 
 	if yearday < 0 || yearday > 1231 {
-		return handles.NewBadParamError("yearday", "must at least be in range 0-1231 inclusive to be potentially valid")
+		return ehttp.NewBadParamError("yearday", "must at least be in range 0-1231 inclusive to be potentially valid")
 	}
 
 	templates.CatchError(c, apptemplates.RenderUserSchedulesYearday(c, yearday))
@@ -128,11 +129,11 @@ func userSchedulesBaseAddFixture(c *transfer.HTTPConnection, a data.Access) erro
 
 	start_time, err := time.Parse(formTimeLayout, params["start_time"])
 	if err != nil {
-		return handles.NewBadParamError("start_time", err.Error())
+		return ehttp.NewBadParamError("start_time", err.Error())
 	}
 	end_time, err := time.Parse(formTimeLayout, params["end_time"])
 	if err != nil {
-		return handles.NewBadParamError("end_time", err.Error())
+		return ehttp.NewBadParamError("end_time", err.Error())
 	}
 
 	cal, err := c.Client().(models.User).Calendar(persistence.ModelsStore(a))
@@ -171,7 +172,7 @@ func getVals(r *http.Request, v ...string) (map[string]string, error) {
 	for _, v := range v {
 		s := r.FormValue(v)
 		if s == "" {
-			return nil, handles.NewMissingParamError(v)
+			return nil, ehttp.NewMissingParamError(v)
 		}
 		params[v] = s
 	}

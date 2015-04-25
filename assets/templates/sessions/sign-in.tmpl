@@ -1,7 +1,7 @@
 {{define "Title"}} Authentication {{end}}
 
 {{define "Form"}}
-    <form class="sessions" action="/sign-in" method="POST">
+    <form class="sessions" action="{{.Routes.SessionSignIn}}" method="POST">
         <input type="text" name="id" value="" placeholder="ID">
         <input type="text" name="key" value="" placeholder="Key">
         <input type="submit" value="Sign In">

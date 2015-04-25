@@ -1,8 +1,8 @@
 {{define "HEAD"}} <link rel="stylesheet" type="text/css" href="/css/index.css"> {{end}}
 
 {{define "Header"}}
-    <a href="/register" class="button register">Register</a>
-    <a href="/sign-in" class="button green sign-in">Sign In</a>
+    <a href="{{.Routes.SessionRegister}}" class="button register">Register</a>
+    <a href="{{.Routes.SessionSignIn}}" class="button green sign-in">Sign In</a>
 {{end}}
 
 {{define "Content"}}

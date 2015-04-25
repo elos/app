@@ -1,6 +1,7 @@
 package app
 
 import (
+	"github.com/elos/autonomous"
 	"github.com/elos/data"
 	"github.com/elos/ehttp"
 	"github.com/elos/ehttp/handles"
@@ -11,6 +12,10 @@ import (
 )
 
 type App struct {
+	autonomous.Life
+	autonomous.Stopper
+	autonomous.Managed
+
 	*ehttp.Server
 
 	store               data.Store
@@ -28,6 +33,9 @@ func New(host string, port int, store data.Store) *App {
 	server := ehttp.NewServer(host, port, router, store)
 
 	return &App{
+		Life:    autonomous.NewLife(),
+		Stopper: make(autonomous.Stopper),
+
 		Server: server,
 		router: router,
 
@@ -44,4 +52,28 @@ func (app *App) UserAuth(f handles.AccessHandle, s data.Store) httprouter.Handle
 
 func (app *App) UserTemplate(f handles.TemplateHandle, s data.Store) httprouter.Handle {
 	return app.UserAuth(handles.Template(f), s)
+}
+
+func (app *App) Start() {
+	app.ApplyRoutes()
+
+	app.Life.Begin()
+
+	go app.Server.Start()
+
+	serverstop := make(chan bool, 1)
+
+	go func() {
+		app.Server.WaitStop()
+		serverstop <- true
+	}()
+
+	select {
+	case <-serverstop:
+	case <-app.Stopper:
+		app.Server.Stop()
+		app.Server.WaitStop()
+	}
+
+	app.Life.End()
 }
