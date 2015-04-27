@@ -13,6 +13,7 @@ var (
 	TemplatesDir = filepath.Join(AssetsDir, "templates")
 	ImgDir       = filepath.Join(AssetsDir, "img")
 	CSSDir       = filepath.Join(AssetsDir, "css")
+	JSDir        = filepath.Join(AssetsDir, "js")
 )
 
 const (
@@ -22,6 +23,7 @@ const (
 	SessionAccountCreated
 
 	UserBase
+	UserInteractive
 	UserCalendar
 	UserEvents
 	UserTasks
@@ -65,12 +67,13 @@ var templateSets = templates.TemplateSet{
 	SessionRegister:       Sessions("sessions/register.tmpl"),
 	SessionAccountCreated: Sessions("sessions/account-created.tmpl"),
 
-	UserBase:      Layout("user/base.tmpl"),
-	UserCalendar:  Layout("user/schedules/common.tmpl", "user/calendar.tmpl"),
-	UserEvents:    Layout("user/events.tmpl"),
-	UserTasks:     Layout("user/tasks.tmpl"),
-	UserRoutines:  Layout("user/routines.tmpl"),
-	UserSchedules: Layout("user/schedules.tmpl"),
+	UserBase:        Layout("user/base.tmpl"),
+	UserInteractive: Layout("user/interactive.tmpl"),
+	UserCalendar:    Layout("user/schedules/common.tmpl", "user/calendar.tmpl"),
+	UserEvents:      Layout("user/events.tmpl"),
+	UserTasks:       Layout("user/tasks.tmpl"),
+	UserRoutines:    Layout("user/routines.tmpl"),
+	UserSchedules:   Layout("user/schedules.tmpl"),
 
 	UserSchedulesBase:           Schedules("user/schedules/base.tmpl"),
 	UserSchedulesBaseAddFixture: Schedules("user/schedules/base-add.tmpl"),
@@ -90,12 +93,13 @@ var pathToTemplate = map[string]templates.Name{
 	conf.SessionRegister:       SessionRegister,
 	conf.SessionAccountCreated: SessionAccountCreated,
 
-	conf.UserBase:      UserBase,
-	conf.UserCalendar:  UserCalendar,
-	conf.UserEvents:    UserEvents,
-	conf.UserTasks:     UserTasks,
-	conf.UserRoutines:  UserRoutines,
-	conf.UserSchedules: UserSchedules,
+	conf.UserBase:        UserBase,
+	conf.UserInteractive: UserInteractive,
+	conf.UserCalendar:    UserCalendar,
+	conf.UserEvents:      UserEvents,
+	conf.UserTasks:       UserTasks,
+	conf.UserRoutines:    UserRoutines,
+	conf.UserSchedules:   UserSchedules,
 
 	conf.UserSchedulesBase:           UserSchedulesBase,
 	conf.UserSchedulesBaseAddFixture: UserSchedulesBaseAddFixture,

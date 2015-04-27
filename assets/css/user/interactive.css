@@ -1,0 +1,43 @@
+div#header {
+    border-bottom: 1px solid #CCCCCC;
+}
+
+div#content {
+    background-color: #F1F1F1;
+    min-height: 88vh;
+    max-height: 88vh;
+
+    justify-content: flex-end;
+    flex-direction: column;
+
+    overflow-x: hide;
+    overflow-y: scroll;
+}
+
+div#footer {
+    min-height: 7vh;
+}
+
+div#footer > input[type="text"] {
+    border-radius: 0;
+    width: 100%;
+    height: 7vh;
+}
+
+div#footer > input[type="text"]:focus {
+    border-color: #00FFA3;
+    color: black;
+}
+
+div.output {
+    border: 1px solid #CCCCCC;
+    background-color: white;
+    width: 99.9vw;
+    word-wrap: break-word;
+
+    flex: auto 0 auto;
+}
+
+div.output > p {
+    margin: 1vw;
+}

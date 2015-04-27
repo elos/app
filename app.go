@@ -17,6 +17,7 @@ type App struct {
 	autonomous.Managed
 
 	*ehttp.Server
+	hub *autonomous.Hub
 
 	store               data.Store
 	router              *httprouter.Router
@@ -35,6 +36,8 @@ func New(host string, port int, store data.Store) *App {
 	return &App{
 		Life:    autonomous.NewLife(),
 		Stopper: make(autonomous.Stopper),
+
+		hub: autonomous.NewHub(),
 
 		Server: server,
 		router: router,
@@ -59,6 +62,7 @@ func (app *App) Start() {
 
 	app.Life.Begin()
 
+	go app.hub.Start()
 	go app.Server.Start()
 
 	serverstop := make(chan bool, 1)

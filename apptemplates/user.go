@@ -116,3 +116,7 @@ func RenderUserSchedulesWeekday(c *transfer.HTTPConnection, weekday int) error {
 func RenderUserSchedulesYearday(c *transfer.HTTPConnection, yearday int) error {
 	return engine.Render(c, UserSchedulesYearday, c.Client().(models.User))
 }
+
+func RenderUserInteractive(c *transfer.HTTPConnection) error {
+	return engine.Render(c, UserInteractive, c.Client().(models.User))
+}

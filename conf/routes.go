@@ -15,11 +15,13 @@ var (
 	SessionRegister       = join(SessionBase, "register")
 	SessionAccountCreated = join(SessionBase, "account-created")
 
-	UserBase     = join(Index, "user")
-	UserCalendar = join(UserBase, "calendar")
-	UserEvents   = join(UserBase, "events")
-	UserTasks    = join(UserBase, "tasks")
-	UserRoutines = join(UserBase, "routines")
+	UserBase        = join(Index, "user")
+	UserInteractive = join(UserBase, "interactive")
+	UserREPL        = join(UserBase, "repl")
+	UserCalendar    = join(UserBase, "calendar")
+	UserEvents      = join(UserBase, "events")
+	UserTasks       = join(UserBase, "tasks")
+	UserRoutines    = join(UserBase, "routines")
 
 	UserSchedules        = join(UserBase, "schedules")
 	UserSchedulesBase    = join(UserSchedules, "base")
@@ -45,6 +47,8 @@ type RoutesDefinition struct {
 	SessionAccountCreated,
 
 	UserBase,
+	UserInteractive,
+	UserREPL,
 	UserCalendar,
 	UserEvents,
 	UserTasks,
@@ -73,6 +77,8 @@ var Routes = RoutesDefinition{
 	SessionAccountCreated: SessionAccountCreated,
 
 	UserBase:             UserBase,
+	UserInteractive:      UserInteractive,
+	UserREPL:             UserREPL,
 	UserSchedulesBase:    UserSchedulesBase,
 	UserSchedulesWeekly:  UserSchedulesWeekly,
 	UserSchedulesYearly:  UserSchedulesYearly,

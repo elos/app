@@ -57,8 +57,8 @@ div#header, div#footer {
 /* the iconic green */
 h1.elos {
     color: #00FFA3;
-    font-size: .8em;
-    line-height: 3em;
+    font-size: .9em;
+    line-height: 5vh;
     font-family: "Avenir Next UltraLight";
 }
 

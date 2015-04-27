@@ -3,6 +3,7 @@ package app
 import (
 	"net/http"
 
+	"github.com/elos/api"
 	"github.com/elos/app/apphandles"
 	"github.com/elos/app/apptemplates"
 	. "github.com/elos/app/conf"
@@ -39,6 +40,8 @@ func (app *App) Routes() []*ehttp.Route {
 		Route(POST, SessionRegister, FanOut(apphandles.RegisterHandle(app.store))),
 
 		Route(GET, UserBase, FanOut(apptemplates.Show(apptemplates.UserBase))),
+		Route(GET, UserInteractive, FanOut(app.UserTemplate(apptemplates.RenderUserInteractive, app.store))),
+		Route(GET, UserREPL, FanOut(app.UserAuth(api.REPL(transfer.DefaultUpgrader, app.hub), app.store))),
 		Route(GET, UserCalendar, FanOut(app.UserTemplate(apptemplates.RenderUserCalendar, app.store))),
 		Route(GET, UserTasks, FanOut(app.UserTemplate(apptemplates.RenderUserEvents, app.store))),
 		Route(GET, UserRoutines, FanOut(app.UserTemplate(apptemplates.RenderUserTasks, app.store))),
@@ -76,4 +79,5 @@ func (app *App) ApplyRoutes() {
 
 	r.ServeFiles("/img/*filepath", http.Dir(apptemplates.ImgDir))
 	r.ServeFiles("/css/*filepath", http.Dir(apptemplates.CSSDir))
+	r.ServeFiles("/js/*filepath", http.Dir(apptemplates.JSDir))
 }
