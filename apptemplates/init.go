@@ -21,7 +21,7 @@ func init() {
 		WithContext(&context{Routes: conf.Routes}).
 		WithFuncMap(funcs)
 
-	if err := engine.ParseHTMLTemplates(); err != nil {
+	if err := engine.ParseTemplates(); err != nil {
 		log.Fatal(err)
 	}
 }
