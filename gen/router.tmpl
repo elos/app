@@ -1,0 +1,33 @@
+{{define "ROOT"}}
+package app
+
+import (
+    "github.com/elos/ehttp/builtin"
+    "github.com/elos/app/routes"
+)
+
+func router(db data.DB, sessions auth.Sessions, agents autonomous.Manager) serve.Router {
+    router := builtin.NewRouter()
+    userAuther := routes.NewUserAuthenticator(db, sessions)
+
+    {{range $key, $endpoint := .Endpoints}}
+            {{range $action := $endpoint.Actions}}
+            {{if userAuth $endpoint}}
+            router.{{action $action}}(routes.{{name $endpoint.Name}}, routes.UserAuth(func(c *serve.Conn, u *models.User) {
+                    routes.{{name $endpoint.Name}}{{name (action $action)}}({{argsFor $endpoint}})
+                }, userAuther))
+            {{else}}
+            router.{{action $action}}(routes.{{name $endpoint.Name}}, func(c *serve.Conn) {
+                    routes.{{name $endpoint.Name}}{{name (action $action)}}({{argsFor $endpoint}})
+                })
+            {{end}}
+            {{end}}
+    {{end}}
+
+    router.ServeFiles("/img/*filepath", http.Dir(views.ImgDir))
+    router.ServeFiles("/css/*filepath", http.Dir(views.CSSDir))
+    router.ServeFiles("/js/*filepath", http.Dir(views.JSDir))
+
+    return router
+}
+{{end}}
