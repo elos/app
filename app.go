@@ -1,6 +1,8 @@
 package app
 
 import (
+	"net/http"
+
 	"github.com/elos/autonomous"
 	"github.com/elos/data"
 	"github.com/elos/ehttp/auth"
@@ -9,21 +11,24 @@ import (
 )
 
 type App struct {
-	router          serve.Router
-	db              data.DB
-	sessions        auth.Sessions
-	*autonomous.Hub // inherits life from the hub
+	router   serve.Router
+	db       data.DB
+	sessions auth.Sessions
+	agents   autonomous.Manager
 }
 
-func New(db data.DB) *App {
+func New(db data.DB, man autonomous.Manager) *App {
 	sessions := builtin.NewSessions()
-	hub := autonomous.NewHub()
-	router := router(db, sessions, hub)
+	router := router(db, sessions, man)
 
 	return &App{
 		router:   router,
 		db:       db,
 		sessions: sessions,
-		Hub:      hub,
+		agents:   man,
 	}
+}
+
+func (app *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	app.router.ServeHTTP(w, r)
 }

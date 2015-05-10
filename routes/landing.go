@@ -1,7 +1,14 @@
 package routes
 
-import "github.com/elos/ehttp/serve"
+import (
+	"log"
+
+	"github.com/elos/app/views"
+	"github.com/elos/ehttp/serve"
+)
 
 func LandingGET(c *serve.Conn) {
-	//views.Execute(c.ResponseWriter(), views.Landing, nil)
+	if err := views.Engine.Execute(c.ResponseWriter(), views.Index, nil); err != nil {
+		log.Print(err)
+	}
 }

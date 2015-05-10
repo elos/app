@@ -1,8 +1,8 @@
 {{define "HEAD"}} {{css "/css/index.css"}} {{end}}
 
 {{define "Header"}}
-    <a href="{{.Routes.SessionRegister}}" class="button register">Register</a>
-    <a href="{{.Routes.SessionSignIn}}" class="button green sign-in">Sign In</a>
+    <a href="{{ .Routes.SessionsRegister }}" class="button register">Register</a>
+    <a href="{{ .Routes.SessionsSignIn }}" class="button green sign-in">Sign In</a>
 {{end}}
 
 {{define "Content"}}

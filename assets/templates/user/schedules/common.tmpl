@@ -12,7 +12,6 @@
 
 {{define "Fixture"}}
     <a class="fixture"
-       href="{{interpolate .Routes.UserSchedulesBaseFixtures .Fixture.ID}}"
        style="top:{{ .Fixture.RelStart }}%; height:{{.Fixture.RelHeight}}%;">
             <div class="name"> {{.Fixture.Name}} </div>
             <div class="time"> {{.Fixture.Time}} </div>

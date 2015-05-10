@@ -15,10 +15,12 @@ func init() {
 	engine = templates.
 		NewEngine(TemplatesDir, &templateSets).
 		WithEveryLoad().
-		WithContext(&context{}).
+		WithContext(globalContext).
 		WithFuncMap(funcs)
 
 	if err := engine.Parse(); err != nil {
 		log.Fatal(err)
 	}
+
+	Engine = engine
 }
