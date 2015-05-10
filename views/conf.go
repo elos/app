@@ -17,9 +17,9 @@ var (
 
 const (
 	Index templates.Name = iota
-	SessionSignIn
-	SessionRegister
-	SessionAccountCreated
+	SessionsSignIn
+	SessionsRegister
+	SessionsAccountCreated
 
 	UserBase
 	UserInteractive
@@ -62,9 +62,9 @@ func Schedules(v ...string) []string {
 var templateSets = templates.TemplateSet{
 	Index: Layout("index.tmpl"),
 
-	SessionSignIn:         Sessions("sessions/sign-in.tmpl"),
-	SessionRegister:       Sessions("sessions/register.tmpl"),
-	SessionAccountCreated: Sessions("sessions/account-created.tmpl"),
+	SessionsSignIn:         Sessions("sessions/sign-in.tmpl"),
+	SessionsRegister:       Sessions("sessions/register.tmpl"),
+	SessionsAccountCreated: Sessions("sessions/account-created.tmpl"),
 
 	UserBase:        Layout("user/base.tmpl"),
 	UserInteractive: Layout("user/interactive.tmpl"),
