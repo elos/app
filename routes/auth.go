@@ -26,7 +26,7 @@ func UserAuth(route UserRoute, auther UserAuthenticator) serve.Route {
 		user, err := auther(c.Request())
 
 		if err != nil {
-			http.Redirect(c.ResponseWriter(), c.Request(), SessionsSignIn, 401)
+			http.Redirect(c.ResponseWriter(), c.Request(), SessionsSignIn, 301)
 		} else {
 			route(c, user)
 		}

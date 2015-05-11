@@ -1,13 +1,16 @@
 package routes
 
 import (
+	"github.com/elos/app/views"
 	"github.com/elos/autonomous"
 	"github.com/elos/data"
 	"github.com/elos/ehttp/serve"
+	"github.com/elos/ehttp/templates"
 	"github.com/elos/models"
 )
 
 func UserGET(c *serve.Conn, u *models.User) {
+	templates.CatchError(c, views.Engine.Execute(c, views.User, u))
 }
 
 func UserInteractiveGET(c *serve.Conn, u *models.User, db data.DB, agent autonomous.Manager) {

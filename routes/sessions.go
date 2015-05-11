@@ -22,8 +22,10 @@ func SessionsSignInGET(c *serve.Conn, db data.DB, sessions auth.Sessions) {
 func SessionsSignInPOST(c *serve.Conn, db data.DB, sessions auth.Sessions) {
 	sesh, err := sessions.Get(c.Request(), ElosAuth)
 	if err != nil {
-		log.Print("Error getting session: ", err)
-		return
+		if sesh, err = sessions.New(c.Request(), ElosAuth); err != nil {
+			log.Print("Error getting session: ", err)
+			return
+		}
 	}
 	auther := auth.Auth(auth.FormCredentialer)
 	u, ok, err := auther(db, c.Request())

@@ -21,7 +21,7 @@ const (
 	SessionsRegister
 	SessionsAccountCreated
 
-	UserBase
+	User
 	UserInteractive
 	UserCalendar
 	UserEvents
@@ -66,7 +66,7 @@ var templateSets = templates.TemplateSet{
 	SessionsRegister:       Sessions("sessions/register.tmpl"),
 	SessionsAccountCreated: Sessions("sessions/account-created.tmpl"),
 
-	UserBase:        Layout("user/base.tmpl"),
+	User:            Layout("user/base.tmpl"),
 	UserInteractive: Layout("user/interactive.tmpl"),
 	UserCalendar:    Layout("user/schedules/common.tmpl", "user/calendar.tmpl"),
 	UserEvents:      Layout("user/events.tmpl"),
