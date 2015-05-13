@@ -16,12 +16,26 @@ h1#title {
     width: 100vw;
     max-height: 2em;
 
-    color: #979797;
+    color: #4C4C4C;
     font-size: 1em;
     text-align: center;
     line-height: 1.5em;
 
     flex: 1;
+
+    margin-bottom: 10px;
+}
+
+div.card.sessions {
+    width: 100vw;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    padding: 7vw 10px;
 }
 
 /* the actual form */
@@ -47,6 +61,7 @@ form.sessions > input[type="text"] {
     margin: 0.2em;
     padding: 0.6em;
     padding-left: 0.8em;
+    margin-bottom: 10px;
 }
 
 /* the button of the form: sign up, sign in, ok */
@@ -57,5 +72,7 @@ form.sessions > input[type="submit"] {
     font-size: .85em;
     padding: 5px;
     cursor: pointer;
-    color: #00FFA3;
+    color: #10ED95;
+    /*color: #00FFA3;*/
+    font-size: 1em;
 }

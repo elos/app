@@ -8,6 +8,7 @@ import (
 	"github.com/elos/ehttp/auth"
 	"github.com/elos/ehttp/builtin"
 	"github.com/elos/ehttp/serve"
+	"github.com/gorilla/context"
 )
 
 type App struct {
@@ -30,5 +31,5 @@ func New(db data.DB, man autonomous.Manager) *App {
 }
 
 func (app *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	app.router.ServeHTTP(w, r)
+	context.ClearHandler(http.HandlerFunc(app.router.ServeHTTP)).ServeHTTP(w, r)
 }
