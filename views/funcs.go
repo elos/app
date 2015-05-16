@@ -8,6 +8,7 @@ import (
 
 var (
 	funcs = template.FuncMap{
+		"has":  templates.Has,
 		"dict": templates.Dict,
 		"css":  templates.CSS,
 		"js":   templates.JS,

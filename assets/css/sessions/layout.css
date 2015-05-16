@@ -26,6 +26,7 @@ h1#title {
     margin-bottom: 10px;
 }
 
+/* the card surrounding the form values and submit button */
 div.card.sessions {
     width: 100vw;
 
@@ -36,6 +37,7 @@ div.card.sessions {
     display: flex;
     flex-direction: column;
     padding: 7vw 10px;
+    margin-bottom: 10px;
 }
 
 /* the actual form */
@@ -75,4 +77,33 @@ form.sessions > input[type="submit"] {
     color: #10ED95;
     /*color: #00FFA3;*/
     font-size: 1em;
+}
+
+/* flash information */
+div.flash {
+    width: 50vw;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+
+    background-color: rgba(0, 0, 0, .1);
+    border: 1px solid black;
+}
+
+/* error (red) color */
+div.flash.error {
+    color: #ED1068;
+    border-color: #ED1068;
+
+    /* rgb of #ED1068, opacity 10% */
+    background-color: rgba(237, 16, 104, 0.1);
+}
+
+/* info (blue) color */
+div.flash.info {
+    color: #22CBEC;
+    border-color: #22CBEC;
+
+    /* rgb of #22CBEC, opacity 10% */
+    background-color: rgba(34, 203, 206, 0.1);
 }

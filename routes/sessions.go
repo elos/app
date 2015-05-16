@@ -30,14 +30,14 @@ func SessionsSignInPOST(c *serve.Conn, db data.DB, sessions auth.Sessions) {
 	auther := auth.Auth(auth.FormCredentialer)
 	u, ok, err := auther(db, c.Request())
 	if !ok {
-		c.Write([]byte(err.Error()))
+		views.RenderSignIn(c, &views.Flash{"error", err.Error()})
 		return
 	}
 
 	sesh.SetValue(userID, u.ID().String())
 	sesh.SetValue(userKey, u.Key)
 	if err := sesh.Save(c.Request(), c); err != nil {
-		c.Write([]byte(err.Error()))
+		views.RenderSignIn(c, &views.Flash{"error", err.Error()})
 	} else {
 		http.Redirect(c.ResponseWriter(), c.Request(), User, http.StatusFound)
 	}

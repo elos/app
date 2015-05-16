@@ -9,6 +9,11 @@
     <div class="card sessions">
     {{template "Form" $}}
     </div>
+    {{if (has .Data) and (has .Data.Flash)}}
+        {{with $flash := .Data.Flash}}
+        <div class="flash {{$flash.Class}}"> {{html $flash.Msg}} </div>
+        {{end}}
+    {{end}}
 {{end}}
 
 {{define "Footer"}} {{end}}
