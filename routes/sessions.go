@@ -24,6 +24,7 @@ func SessionsSignInPOST(c *serve.Conn, db data.DB, sessions auth.Sessions) {
 	if err != nil {
 		if sesh, err = sessions.New(c.Request(), ElosAuth); err != nil {
 			log.Print("Error getting session: ", err)
+			views.RenderSignIn(c, &views.Flash{"error", err.Error()})
 			return
 		}
 	}

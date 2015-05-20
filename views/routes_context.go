@@ -41,6 +41,10 @@ func (r *RoutesContext) UserInteractive() string {
 	return fmt.Sprintf("/user/interactive")
 }
 
+func (r *RoutesContext) UserRepl() string {
+	return fmt.Sprintf("/user/repl")
+}
+
 func (r *RoutesContext) UserRoutines() string {
 	return fmt.Sprintf("/user/routines")
 }

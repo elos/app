@@ -10,8 +10,8 @@ import (
 	"text/template"
 
 	"github.com/elos/aeolus"
+	"github.com/elos/ehttp/templates"
 	"github.com/elos/metis"
-	"github.com/elos/metis/templates"
 )
 
 const (
@@ -142,7 +142,7 @@ func main() {
 		"interpolatorFor": interpolatorFor,
 	})
 
-	if err := e.ParseTemplates(); err != nil {
+	if err := e.Parse(); err != nil {
 		log.Fatal(err)
 	}
 

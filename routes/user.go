@@ -13,7 +13,11 @@ func UserGET(c *serve.Conn, u *models.User) {
 	templates.CatchError(c, views.Engine.Execute(c, views.User, u))
 }
 
-func UserInteractiveGET(c *serve.Conn, u *models.User, db data.DB, agent autonomous.Manager) {
+func UserInteractiveGET(c *serve.Conn, u *models.User, db data.DB) {
+	templates.CatchError(c, views.Engine.Execute(c, views.UserInteractive, u))
+}
+
+func UserReplGET(c *serve.Conn, u *models.User, db data.DB, agents autonomous.Manager) {
 }
 
 func UserCalendarGET(c *serve.Conn, u *models.User, db data.DB) {

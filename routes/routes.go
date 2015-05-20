@@ -17,6 +17,8 @@ const (
 
 	UserInteractive = "/user/interactive"
 
+	UserRepl = "/user/repl"
+
 	UserRoutines = "/user/routines"
 
 	UserSchedules = "/user/schedules"

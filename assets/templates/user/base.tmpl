@@ -9,9 +9,8 @@
     <p class="info-text"> Welcome to elos. </p>
     <div id="buttons">
     {{with $routes := .Routes}}
-        <form action="{{$routes.UserCalendar}}">
-            <input type="submit" value="Calendar">
-        </form>
+        <a class="button" href="{{$routes.UserCalendar}}"> Calendar </a>
+        <a class="button" href="{{$routes.UserInteractive}}"> Interactive </a>
     {{end}}
     </div>
 {{end}}

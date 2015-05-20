@@ -54,7 +54,11 @@ func router(db data.DB, sessions auth.Sessions, agents autonomous.Manager) serve
 	}, userAuther))
 
 	router.GET(routes.UserInteractive, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserInteractiveGET(c, u, db, agents)
+		routes.UserInteractiveGET(c, u, db)
+	}, userAuther))
+
+	router.GET(routes.UserRepl, routes.UserAuth(func(c *serve.Conn, u *models.User) {
+		routes.UserReplGET(c, u, db, agents)
 	}, userAuther))
 
 	router.GET(routes.UserRoutines, routes.UserAuth(func(c *serve.Conn, u *models.User) {
