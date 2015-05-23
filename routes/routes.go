@@ -1,49 +1,45 @@
-
 package routes
 
 const (
+	Landing = "/"
 
-    Landing = "/"
+	Sessions = "/sessions"
 
-    Sessions = "/sessions"
+	SessionsRegister = "/sessions/register"
 
-    SessionsRegister = "/sessions/register"
+	SessionsSignIn = "/sessions/sign_in"
 
-    SessionsSignIn = "/sessions/sign_in"
+	User = "/user"
 
-    User = "/user"
+	UserCalendar = "/user/calendar"
 
-    UserCalendar = "/user/calendar"
+	UserEvents = "/user/events"
 
-    UserEvents = "/user/events"
+	UserInteractive = "/user/interactive"
 
-    UserInteractive = "/user/interactive"
+	UserRepl = "/user/repl"
 
-    UserRepl = "/user/repl"
+	UserRoutines = "/user/routines"
 
-    UserRoutines = "/user/routines"
+	UserSchedules = "/user/schedules"
 
-    UserSchedules = "/user/schedules"
+	UserSchedulesBase = "/user/schedules/base"
 
-    UserSchedulesBase = "/user/schedules/base"
+	UserSchedulesBaseFixtures = "/user/schedules/base/fixtures/:fixture_id"
 
-    UserSchedulesBaseFixtures = "/user/schedules/base/fixtures/:fixture_id"
+	UserSchedulesBaseFixturesCreate = "/user/schedules/base/fixtures/:fixture_id/create"
 
-    UserSchedulesBaseFixturesCreate = "/user/schedules/base/fixtures/:fixture_id/create"
+	UserSchedulesBaseFixturesDelete = "/user/schedules/base/fixtures/:fixture_id/delete"
 
-    UserSchedulesBaseFixturesDelete = "/user/schedules/base/fixtures/:fixture_id/delete"
+	UserSchedulesBaseFixturesEdit = "/user/schedules/base/fixtures/:fixture_id/edit"
 
-    UserSchedulesBaseFixturesEdit = "/user/schedules/base/fixtures/:fixture_id/edit"
+	UserSchedulesWeekly = "/user/schedules/weekly"
 
-    UserSchedulesWeekly = "/user/schedules/weekly"
+	UserSchedulesWeeklyWeekday = "/user/schedules/weekly/:weekday"
 
-    UserSchedulesWeeklyWeekday = "/user/schedules/weekly/:weekday"
+	UserSchedulesYearly = "/user/schedules/yearly"
 
-    UserSchedulesYearly = "/user/schedules/yearly"
+	UserSchedulesYearlyYearday = "/user/schedules/yearly/:yearday"
 
-    UserSchedulesYearlyYearday = "/user/schedules/yearly/:yearday"
-
-    UserTasks = "/user/tasks"
-
+	UserTasks = "/user/tasks"
 )
-
