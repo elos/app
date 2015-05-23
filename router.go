@@ -2,6 +2,8 @@ package app
 
 import (
 	"net/http"
+	"path/filepath"
+	"runtime"
 
 	"github.com/elos/app/routes"
 	"github.com/elos/app/services"
@@ -9,6 +11,13 @@ import (
 	"github.com/elos/ehttp/serve"
 	"github.com/elos/models"
 )
+
+var root string
+
+func init() {
+	_, filename, _, _ := runtime.Caller(1)
+	root = filepath.Dir(filename)
+}
 
 func router(agents services.Agents, db services.DB, sessions services.Sessions) serve.Router {
 	router := builtin.NewRouter()
@@ -90,11 +99,11 @@ func router(agents services.Agents, db services.DB, sessions services.Sessions) 
 		routes.UserTasksGET(c, u, db)
 	}, userAuther))
 
-	router.ServeFiles("css/*filepath", http.Dir("assets/css"))
+	router.ServeFiles("/css/*filepath", http.Dir(filepath.Join(root, "/assets/css/")))
 
-	router.ServeFiles("img/*filepath", http.Dir("assets/img"))
+	router.ServeFiles("/img/*filepath", http.Dir(filepath.Join(root, "/assets/img/")))
 
-	router.ServeFiles("js/*filepath", http.Dir("assets/js"))
+	router.ServeFiles("/js/*filepath", http.Dir(filepath.Join(root, "/assets/js/")))
 
 	return router
 }
