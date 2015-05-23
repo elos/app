@@ -32,15 +32,27 @@ func router(m *Middleware, s *Services) serve.Router {
 
 	})
 
+	router.GET(routes.SessionsSignIn, func(c *serve.Conn) {
+
+		routes.SessionsSignInGET(c, s.DB, s.Sessions)
+
+	})
+
+	router.POST(routes.SessionsSignIn, func(c *serve.Conn) {
+
+		routes.SessionsSignInPOST(c, s.DB, s.Sessions)
+
+	})
+
 	router.GET(routes.SessionsRegister, func(c *serve.Conn) {
 
 		routes.SessionsRegisterGET(c, s.DB)
 
 	})
 
-	router.GET(routes.SessionsSignIn, func(c *serve.Conn) {
+	router.POST(routes.SessionsRegister, func(c *serve.Conn) {
 
-		routes.SessionsSignInGET(c, s.DB, s.Sessions)
+		routes.SessionsRegisterPOST(c, s.DB)
 
 	})
 
@@ -51,6 +63,34 @@ func router(m *Middleware, s *Services) serve.Router {
 		}
 
 		routes.UserGET(c)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserInteractive, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserInteractiveGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserRepl, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserReplGET(c, s.DB, s.Agents)
 
 		if ok := m.UserAuth.Outbound(c); !ok {
 			return
@@ -86,27 +126,13 @@ func router(m *Middleware, s *Services) serve.Router {
 
 	})
 
-	router.GET(routes.UserInteractive, func(c *serve.Conn) {
+	router.GET(routes.UserTasks, func(c *serve.Conn) {
 
 		if ok := m.UserAuth.Inbound(c); !ok {
 			return
 		}
 
-		routes.UserInteractiveGET(c, s.DB)
-
-		if ok := m.UserAuth.Outbound(c); !ok {
-			return
-		}
-
-	})
-
-	router.GET(routes.UserRepl, func(c *serve.Conn) {
-
-		if ok := m.UserAuth.Inbound(c); !ok {
-			return
-		}
-
-		routes.UserReplGET(c, s.DB, s.Agents)
+		routes.UserTasksGET(c, s.DB)
 
 		if ok := m.UserAuth.Outbound(c); !ok {
 			return
@@ -170,6 +196,20 @@ func router(m *Middleware, s *Services) serve.Router {
 
 	})
 
+	router.POST(routes.UserSchedulesBaseFixtures, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesPOST(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
 	router.DELETE(routes.UserSchedulesBaseFixtures, func(c *serve.Conn) {
 
 		if ok := m.UserAuth.Inbound(c); !ok {
@@ -198,20 +238,6 @@ func router(m *Middleware, s *Services) serve.Router {
 
 	})
 
-	router.GET(routes.UserSchedulesBaseFixturesDelete, func(c *serve.Conn) {
-
-		if ok := m.UserAuth.Inbound(c); !ok {
-			return
-		}
-
-		routes.UserSchedulesBaseFixturesDeleteGET(c, s.DB)
-
-		if ok := m.UserAuth.Outbound(c); !ok {
-			return
-		}
-
-	})
-
 	router.GET(routes.UserSchedulesBaseFixturesEdit, func(c *serve.Conn) {
 
 		if ok := m.UserAuth.Inbound(c); !ok {
@@ -219,6 +245,20 @@ func router(m *Middleware, s *Services) serve.Router {
 		}
 
 		routes.UserSchedulesBaseFixturesEditGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesBaseFixturesDelete, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesDeleteGET(c, s.DB)
 
 		if ok := m.UserAuth.Outbound(c); !ok {
 			return
@@ -275,20 +315,6 @@ func router(m *Middleware, s *Services) serve.Router {
 		}
 
 		routes.UserSchedulesYearlyYeardayGET(c, s.DB)
-
-		if ok := m.UserAuth.Outbound(c); !ok {
-			return
-		}
-
-	})
-
-	router.GET(routes.UserTasks, func(c *serve.Conn) {
-
-		if ok := m.UserAuth.Inbound(c); !ok {
-			return
-		}
-
-		routes.UserTasksGET(c, s.DB)
 
 		if ok := m.UserAuth.Outbound(c); !ok {
 			return
