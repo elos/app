@@ -1,45 +1,49 @@
+
 package routes
 
 const (
-	Landing = "/"
 
-	Sessions = "/sessions"
+    Landing = "/"
 
-	SessionsRegister = "/sessions/register"
+    Sessions = "/sessions"
 
-	SessionsSignIn = "/sessions/sign_in"
+    SessionsRegister = "/sessions/register"
 
-	User = "/user"
+    SessionsSignIn = "/sessions/sign_in"
 
-	UserCalendar = "/user/calendar"
+    User = "/user"
 
-	UserEvents = "/user/events"
+    UserCalendar = "/user/calendar"
 
-	UserInteractive = "/user/interactive"
+    UserEvents = "/user/events"
 
-	UserRepl = "/user/repl"
+    UserInteractive = "/user/interactive"
 
-	UserRoutines = "/user/routines"
+    UserRepl = "/user/repl"
 
-	UserSchedules = "/user/schedules"
+    UserRoutines = "/user/routines"
 
-	UserSchedulesBase = "/user/schedules/base"
+    UserSchedules = "/user/schedules"
 
-	UserSchedulesBaseFixtures = "/user/schedules/base/fixtures/:fixture_id"
+    UserSchedulesBase = "/user/schedules/base"
 
-	UserSchedulesBaseFixturesCreate = "/user/schedules/base/fixtures/:fixture_id/create"
+    UserSchedulesBaseFixtures = "/user/schedules/base/fixtures/:fixture_id"
 
-	UserSchedulesBaseFixturesDelete = "/user/schedules/base/fixtures/:fixture_id/delete"
+    UserSchedulesBaseFixturesCreate = "/user/schedules/base/fixtures/:fixture_id/create"
 
-	UserSchedulesBaseFixturesEdit = "/user/schedules/base/fixtures/:fixture_id/edit"
+    UserSchedulesBaseFixturesDelete = "/user/schedules/base/fixtures/:fixture_id/delete"
 
-	UserSchedulesWeekly = "/user/schedules/weekly"
+    UserSchedulesBaseFixturesEdit = "/user/schedules/base/fixtures/:fixture_id/edit"
 
-	UserSchedulesWeeklyWeekday = "/user/schedules/weekly/:weekday"
+    UserSchedulesWeekly = "/user/schedules/weekly"
 
-	UserSchedulesYearly = "/user/schedules/yearly"
+    UserSchedulesWeeklyWeekday = "/user/schedules/weekly/:weekday"
 
-	UserSchedulesYearlyYearday = "/user/schedules/yearly/:yearday"
+    UserSchedulesYearly = "/user/schedules/yearly"
 
-	UserTasks = "/user/tasks"
+    UserSchedulesYearlyYearday = "/user/schedules/yearly/:yearday"
+
+    UserTasks = "/user/tasks"
+
 )
+

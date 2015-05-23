@@ -1,8 +1,8 @@
 package routes
 
 import (
+	"github.com/elos/app/services"
 	"github.com/elos/app/views"
-	"github.com/elos/autonomous"
 	"github.com/elos/data"
 	"github.com/elos/ehttp/serve"
 	"github.com/elos/ehttp/templates"
@@ -17,7 +17,7 @@ func UserInteractiveGET(c *serve.Conn, u *models.User, db data.DB) {
 	templates.CatchError(c, views.Engine.Execute(c, views.UserInteractive, u))
 }
 
-func UserReplGET(c *serve.Conn, u *models.User, db data.DB, agents autonomous.Manager) {
+func UserReplGET(c *serve.Conn, u *models.User, agents services.Agents, db services.DB) {
 }
 
 func UserCalendarGET(c *serve.Conn, u *models.User, db data.DB) {
