@@ -8,27 +8,31 @@ import (
 	"github.com/gorilla/context"
 )
 
-type App struct {
-	router serve.Router
-
-	agents services.Agents
-
-	db services.DB
-
-	sessions services.Sessions
+type Middleware struct {
+	UserAuth serve.Middleware
 }
 
-func New(agents services.Agents, db services.DB, sessions services.Sessions) *App {
-	router := router(agents, db, sessions)
+type Services struct {
+	services.Agents
+
+	services.DB
+
+	services.Sessions
+}
+
+type App struct {
+	router serve.Router
+	*Middleware
+	*Services
+}
+
+func New(m *Middleware, s *Services) *App {
+	router := router(m, s)
 
 	return &App{
-		router: router,
-
-		agents: agents,
-
-		db: db,
-
-		sessions: sessions,
+		router:     router,
+		Middleware: m,
+		Services:   s,
 	}
 }
 

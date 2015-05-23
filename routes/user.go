@@ -9,63 +9,77 @@ import (
 	"github.com/elos/models"
 )
 
-func UserGET(c *serve.Conn, u *models.User) {
+func UserGET(c *serve.Conn) {
+	v, ok := c.Context("user")
+	if !ok {
+		return
+	}
+
+	u := v.(*models.User)
+
 	templates.CatchError(c, views.Engine.Execute(c, views.User, u))
 }
 
-func UserInteractiveGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserInteractiveGET(c *serve.Conn, db data.DB) {
+	v, ok := c.Context("user")
+	if !ok {
+		return
+	}
+
+	u := v.(*models.User)
+
 	templates.CatchError(c, views.Engine.Execute(c, views.UserInteractive, u))
 }
 
-func UserReplGET(c *serve.Conn, u *models.User, agents services.Agents, db services.DB) {
+func UserReplGET(c *serve.Conn, db services.DB, agents services.Agents) {
 }
 
-func UserCalendarGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserCalendarGET(c *serve.Conn, db data.DB) {
 }
 
-func UserEventsGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserEventsGET(c *serve.Conn, db data.DB) {
 }
 
-func UserTasksGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserTasksGET(c *serve.Conn, db data.DB) {
 }
 
-func UserRoutinesGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserRoutinesGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseFixturesGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseFixturesGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseFixturesPOST(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseFixturesPOST(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseFixturesDELETE(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseFixturesDELETE(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseFixturesCreateGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseFixturesCreateGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseFixturesEditGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseFixturesEditGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesBaseFixturesDeleteGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesBaseFixturesDeleteGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesWeeklyGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesWeeklyGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesWeeklyWeekdayGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesWeeklyWeekdayGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesYearlyGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesYearlyGET(c *serve.Conn, db data.DB) {
 }
 
-func UserSchedulesYearlyYeardayGET(c *serve.Conn, u *models.User, db data.DB) {
+func UserSchedulesYearlyYeardayGET(c *serve.Conn, db data.DB) {
 }
 
 /*

@@ -6,10 +6,8 @@ import (
 	"runtime"
 
 	"github.com/elos/app/routes"
-	"github.com/elos/app/services"
 	"github.com/elos/ehttp/builtin"
 	"github.com/elos/ehttp/serve"
-	"github.com/elos/models"
 )
 
 var root string
@@ -19,85 +17,284 @@ func init() {
 	root = filepath.Dir(filename)
 }
 
-func router(agents services.Agents, db services.DB, sessions services.Sessions) serve.Router {
+func router(m *Middleware, s *Services) serve.Router {
 	router := builtin.NewRouter()
-	userAuther := routes.NewUserAuthenticator(db, sessions)
 
 	router.GET(routes.Landing, func(c *serve.Conn) {
+
 		routes.LandingGET(c)
+
 	})
 
 	router.GET(routes.Sessions, func(c *serve.Conn) {
+
 		routes.SessionsGET(c)
+
 	})
 
-	router.GET(routes.User, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserGET(c, u)
-	}, userAuther))
+	router.GET(routes.SessionsRegister, func(c *serve.Conn) {
 
-	router.GET(routes.UserCalendar, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserCalendarGET(c, u, db)
-	}, userAuther))
+		routes.SessionsRegisterGET(c, s.DB)
 
-	router.GET(routes.UserEvents, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserEventsGET(c, u, db)
-	}, userAuther))
+	})
 
-	router.GET(routes.UserInteractive, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserInteractiveGET(c, u, db)
-	}, userAuther))
+	router.GET(routes.SessionsSignIn, func(c *serve.Conn) {
 
-	router.GET(routes.UserRepl, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserReplGET(c, u, agents, db)
-	}, userAuther))
+		routes.SessionsSignInGET(c, s.DB, s.Sessions)
 
-	router.GET(routes.UserRoutines, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserRoutinesGET(c, u, db)
-	}, userAuther))
+	})
 
-	router.GET(routes.UserSchedules, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesGET(c, u, db)
-	}, userAuther))
+	router.GET(routes.User, func(c *serve.Conn) {
 
-	router.GET(routes.UserSchedulesBase, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesBaseGET(c, u, db)
-	}, userAuther))
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
 
-	router.DELETE(routes.UserSchedulesBaseFixtures, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesBaseFixturesDELETE(c, u, db)
-	}, userAuther))
+		routes.UserGET(c)
 
-	router.GET(routes.UserSchedulesBaseFixturesCreate, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesBaseFixturesCreateGET(c, u, db)
-	}, userAuther))
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
 
-	router.GET(routes.UserSchedulesBaseFixturesDelete, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesBaseFixturesDeleteGET(c, u, db)
-	}, userAuther))
+	})
 
-	router.GET(routes.UserSchedulesBaseFixturesEdit, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesBaseFixturesEditGET(c, u, db)
-	}, userAuther))
+	router.GET(routes.UserCalendar, func(c *serve.Conn) {
 
-	router.GET(routes.UserSchedulesWeekly, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesWeeklyGET(c, u, db)
-	}, userAuther))
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
 
-	router.GET(routes.UserSchedulesWeeklyWeekday, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesWeeklyWeekdayGET(c, u, db)
-	}, userAuther))
+		routes.UserCalendarGET(c, s.DB)
 
-	router.GET(routes.UserSchedulesYearly, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesYearlyGET(c, u, db)
-	}, userAuther))
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
 
-	router.GET(routes.UserSchedulesYearlyYearday, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserSchedulesYearlyYeardayGET(c, u, db)
-	}, userAuther))
+	})
 
-	router.GET(routes.UserTasks, routes.UserAuth(func(c *serve.Conn, u *models.User) {
-		routes.UserTasksGET(c, u, db)
-	}, userAuther))
+	router.GET(routes.UserEvents, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserEventsGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserInteractive, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserInteractiveGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserRepl, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserReplGET(c, s.DB, s.Agents)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserRoutines, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserRoutinesGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedules, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesBase, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesBaseFixtures, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.DELETE(routes.UserSchedulesBaseFixtures, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesDELETE(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesBaseFixturesCreate, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesCreateGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesBaseFixturesDelete, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesDeleteGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesBaseFixturesEdit, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesBaseFixturesEditGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesWeekly, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesWeeklyGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesWeeklyWeekday, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesWeeklyWeekdayGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesYearly, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesYearlyGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserSchedulesYearlyYearday, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserSchedulesYearlyYeardayGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
+
+	router.GET(routes.UserTasks, func(c *serve.Conn) {
+
+		if ok := m.UserAuth.Inbound(c); !ok {
+			return
+		}
+
+		routes.UserTasksGET(c, s.DB)
+
+		if ok := m.UserAuth.Outbound(c); !ok {
+			return
+		}
+
+	})
 
 	router.ServeFiles("/css/*filepath", http.Dir(filepath.Join(root, "/assets/css/")))
 
