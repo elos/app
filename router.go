@@ -116,11 +116,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserGET(c)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -138,11 +138,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserInteractiveGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -160,11 +160,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserReplGET(c, s.DB, s.Agents)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -182,11 +182,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserCalendarGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -204,11 +204,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserEventsGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -226,11 +226,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserTasksGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -248,11 +248,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserRoutinesGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -270,11 +270,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -292,11 +292,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -314,11 +314,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseFixturesGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -336,11 +336,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseFixturesPOST(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -358,11 +358,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseFixturesDELETE(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -380,11 +380,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseFixturesCreateGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -402,11 +402,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseFixturesEditGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -424,11 +424,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesBaseFixturesDeleteGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -446,11 +446,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesWeeklyGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -468,11 +468,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesWeeklyWeekdayGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -490,11 +490,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesYearlyGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
@@ -512,11 +512,11 @@ func router(m *Middleware, s *Services) serve.Router {
 
 		routes.UserSchedulesYearlyYeardayGET(c, s.DB)
 
-		if ok := m.Log.Outbound(c); !ok {
+		if ok := m.SessionAuth.Outbound(c); !ok {
 			return
 		}
 
-		if ok := m.SessionAuth.Outbound(c); !ok {
+		if ok := m.Log.Outbound(c); !ok {
 			return
 		}
 
