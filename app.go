@@ -9,7 +9,9 @@ import (
 )
 
 type Middleware struct {
-	UserAuth serve.Middleware
+	Log serve.Middleware
+
+	SessionAuth serve.Middleware
 }
 
 type Services struct {

@@ -1,10 +1,15 @@
 package routes
 
 import (
+	"log"
+
+	"github.com/elos/agents"
+	"github.com/elos/app/middleware"
 	"github.com/elos/app/services"
 	"github.com/elos/app/views"
 	"github.com/elos/data"
 	"github.com/elos/ehttp/serve"
+	"github.com/elos/ehttp/sock"
 	"github.com/elos/ehttp/templates"
 	"github.com/elos/models"
 )
@@ -31,7 +36,21 @@ func UserInteractiveGET(c *serve.Conn, db data.DB) {
 	templates.CatchError(c, views.Engine.Execute(c, views.UserInteractive, u))
 }
 
-func UserReplGET(c *serve.Conn, db services.DB, agents services.Agents) {
+func UserReplGET(c *serve.Conn, db services.DB, agentsService services.Agents) {
+	conn, err := sock.DefaultUpgrader.Upgrade(c.ResponseWriter(), c.Request())
+	if err != nil {
+		log.Printf("error with websocket: %s", err)
+		return
+	}
+
+	v, ok := c.Context(middleware.UserArtifact)
+	if !ok {
+		panic("user artifact not found")
+	}
+
+	u := v.(*models.User)
+	cd := agents.NewREPLAgent(conn, db, u)
+	go agentsService.StartAgent(cd)
 }
 
 func UserCalendarGET(c *serve.Conn, db data.DB) {
